@@ -19,7 +19,7 @@ namespace Prova.Domain.Entities
             idServer = idserver;
             Description = description;
             Content = content;
-            CreationData = DateTime.Today;
+            CreationDate = DateTime.Today;
 
             ValidationRules(false);
         }
@@ -28,7 +28,7 @@ namespace Prova.Domain.Entities
         public string idServer { get; protected set; }
         public string Description { get; protected set; }
         public string Content { get; protected set; }
-        public DateTime CreationData { get; protected set; }
+        public DateTime CreationDate { get; protected set; }
 
         //public virtual Server Server { get; set; }
 

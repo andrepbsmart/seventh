@@ -29,9 +29,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mapping\" />
-    <Folder Include="Repositorys\" />
-  </ItemGroup>
-
 </Project>

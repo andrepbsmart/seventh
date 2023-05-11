@@ -21,7 +21,7 @@ namespace Prova.Domain.Entities
             Name = name;
             IP = new(ip);
             Port = port;
-            CreationData = DateTime.Today;
+            CreationDate = DateTime.Today;
 
             ValidationRules(false);
         }
@@ -41,7 +41,7 @@ namespace Prova.Domain.Entities
         public string Name { get; protected set; }
         public IP IP { get; protected set; }
         public int Port { get; protected set; }
-        public DateTime CreationData { get; protected set; }
+        public DateTime CreationDate { get; protected set; }
 
         public Notify Notification => _notify;
 

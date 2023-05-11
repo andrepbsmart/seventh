@@ -1,0 +1,12 @@
+C:\seventh\Prova_Seventh\Domain\bin\Debug\net6.0\Domain.deps.json
+C:\seventh\Prova_Seventh\Domain\bin\Debug\net6.0\Domain.dll
+C:\seventh\Prova_Seventh\Domain\bin\Debug\net6.0\Domain.pdb
+C:\seventh\Prova_Seventh\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+C:\seventh\Prova_Seventh\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\seventh\Prova_Seventh\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+C:\seventh\Prova_Seventh\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+C:\seventh\Prova_Seventh\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+C:\seventh\Prova_Seventh\Domain\obj\Debug\net6.0\Domain.dll
+C:\seventh\Prova_Seventh\Domain\obj\Debug\net6.0\refint\Domain.dll
+C:\seventh\Prova_Seventh\Domain\obj\Debug\net6.0\Domain.pdb
+C:\seventh\Prova_Seventh\Domain\obj\Debug\net6.0\ref\Domain.dll

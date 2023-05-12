@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
+using Prova.Domain.Core;
 using Prova.Domain.Entities;
 using Prova.Domain.Interfaces;
 
@@ -29,7 +30,7 @@ namespace Prova.Data.Repositorys
             var video = _context.Videos.Where(x => x.idVideo == idvideo && x.idServer == idserver).FirstOrDefault();
             if (video == null)
             {
-                throw new Exception("Servidor não encontrado");
+                throw new BusinessException("Servidor não encontrado");
             }
             _context.Videos.Remove(video);
             await _context.SaveChangesAsync();
@@ -45,18 +46,18 @@ namespace Prova.Data.Repositorys
             var video = _context.Videos.Where(x => x.idVideo == idvideo && x.idServer == idserver).FirstOrDefault();
             if (video == null)
             {
-                throw new Exception("Servidor não encontrado");
+                throw new BusinessException("Servidor não encontrado");
             }
 
             return video;
         }
 
-        public string FindBinaryById(string idserver, string idvideo)
+        public async Task<string> FindBinaryById(string idserver, string idvideo)
         {
-            var video = _context.Videos.Where(x => x.idVideo == idvideo && x.idServer == idserver).FirstOrDefault();
+            var video = await Task.FromResult(_context.Videos.Where(x => x.idVideo == idvideo && x.idServer == idserver).FirstOrDefault());
             if (video == null)
             {
-                throw new Exception("Servidor não encontrado");
+                throw new BusinessException("Servidor não encontrado");
             }
 
             return video.Content;

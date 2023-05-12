@@ -10,7 +10,7 @@ namespace Prova.Domain.Interfaces
         Task Recycle(int days);
 
         Video FindById(string idserver, string idvideo);
-        string FindBinaryById(string idserver, string idvideo);
+        Task<string> FindBinaryById(string idserver, string idvideo);
         Task<IList<Video>> ListAllVideos(string idsever);
     }
 }

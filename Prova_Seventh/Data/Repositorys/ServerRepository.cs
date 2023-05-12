@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
+using Prova.Domain.Core;
 using Prova.Domain.Entities;
 using Prova.Domain.Interfaces;
 
@@ -17,7 +18,6 @@ namespace Prova.Data.Repositorys
         {
             _context = context;
         }
-
         public async Task SaveAsync(Server server)
         {
             _context.Entry(server).State = EntityState.Added;
@@ -35,8 +35,9 @@ namespace Prova.Data.Repositorys
             var server = _context.Servers.Where(x => x.idServer == idserver).FirstOrDefault();
             if (server == null)
             {
-                throw new Exception("Servidor não encontrado");
+                throw new BusinessException("Servidor não encontrado");
             }
+            _context.Servers.Attach(server);
             _context.Servers.Remove(server);
             await _context.SaveChangesAsync();
         }

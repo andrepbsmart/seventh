@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+
 using Prova.Domain.Core;
 
 namespace Prova.Domain.Entities
@@ -30,7 +33,9 @@ namespace Prova.Domain.Entities
         public string Content { get; protected set; }
         public DateTime CreationDate { get; protected set; }
 
-        //public virtual Server Server { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
+        public virtual Server Server { get; set; }
 
         public Notify Notification => _notify;
 

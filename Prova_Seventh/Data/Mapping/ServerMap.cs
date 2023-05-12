@@ -21,11 +21,13 @@ namespace Prova.Data.Mapping
                 .HasColumnType("varchar")
                 .IsRequired();
 
-            builder.Property(server => server.IP)
-                .HasColumnName("ip")
-                .HasMaxLength(20)
-                .HasColumnType("varchar")
-                .IsRequired();
+            builder.OwnsOne(c => c.IP, b => b.Property("Value").HasColumnName("ip"));
+
+            //builder.Property(server => server.IP)
+            //    .HasColumnName("ip")
+            //    .HasMaxLength(20)
+            //    .HasColumnType("varchar")
+            //    .IsRequired();
 
             builder.Property(server => server.Port)
                 .HasColumnName("port")

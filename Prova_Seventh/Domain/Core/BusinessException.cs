@@ -7,9 +7,10 @@ namespace Prova.Domain.Core
     {
         public Notify Notifications { get; protected set; }
 
-        private BusinessException(string message) : base(message)
+        public BusinessException(string message) : base(message)
         {
             Notifications = new();
+            Notifications.Add("BusinessException", message);
         }
         public BusinessException(string message, Notify notification) : base(message)
         {

@@ -22,7 +22,7 @@ namespace Prova.Domain.Entities
             idServer = idserver;
             Description = description;
             Content = content;
-            CreationDate = DateTime.Today;
+            CreationDate = DateTime.UtcNow;
 
             ValidationRules(false);
         }
@@ -32,10 +32,6 @@ namespace Prova.Domain.Entities
         public string Description { get; protected set; }
         public string Content { get; protected set; }
         public DateTime CreationDate { get; protected set; }
-
-        [JsonIgnore]
-        [IgnoreDataMember]
-        public virtual Server Server { get; set; }
 
         public Notify Notification => _notify;
 

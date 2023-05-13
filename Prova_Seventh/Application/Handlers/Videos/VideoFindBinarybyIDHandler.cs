@@ -26,7 +26,7 @@ namespace Prova.Application.Handlers.Videos
         {
             try
             {
-                string content = _repository.FindBinaryById(request.idServer, request.idVideo).Result;
+                string content = _repository.FindBinaryById(request.idVideo).Result;
 
                 VideoResponseBinary retorno = new(content);
 

@@ -44,6 +44,6 @@ namespace Prova.Application.Responses
         public DateTime CreationDate { get; set; }
 
         public static implicit operator ServerResponseDetail(Server dto)
-            => new ServerResponseDetail(dto.idServer, dto.Name, dto.IP.Value, dto.Port, dto.CreationDate);
+            => new ServerResponseDetail(dto.idServer, dto.Name, dto.IP, dto.Port, dto.CreationDate);
     }
 }

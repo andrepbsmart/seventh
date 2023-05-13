@@ -25,12 +25,12 @@ namespace Prova.Data.Repositorys
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(string idvideo, string idserver)
+        public async Task DeleteAsync(string idvideo)
         {
-            var video = _context.Videos.Where(x => x.idVideo == idvideo && x.idServer == idserver).FirstOrDefault();
+            var video = await Task.FromResult(_context.Videos.Where(x => x.idVideo == idvideo).FirstOrDefault());
             if (video == null)
             {
-                throw new BusinessException("Servidor não encontrado");
+                throw new BusinessException("Video não encontrado");
             }
             _context.Videos.Remove(video);
             await _context.SaveChangesAsync();
@@ -41,23 +41,17 @@ namespace Prova.Data.Repositorys
             throw new NotImplementedException();
         }
 
-        public Video FindById(string idserver, string idvideo)
+        public async Task<Video> FindById(string idvideo)
         {
-            var video = _context.Videos.Where(x => x.idVideo == idvideo && x.idServer == idserver).FirstOrDefault();
-            if (video == null)
-            {
-                throw new BusinessException("Servidor não encontrado");
-            }
-
-            return video;
+            return await _context.Videos.FindAsync(idvideo);
         }
 
-        public async Task<string> FindBinaryById(string idserver, string idvideo)
+        public async Task<string> FindBinaryById(string idvideo)
         {
-            var video = await Task.FromResult(_context.Videos.Where(x => x.idVideo == idvideo && x.idServer == idserver).FirstOrDefault());
+            var video = await Task.FromResult(_context.Videos.Where(x => x.idVideo == idvideo).FirstOrDefault());
             if (video == null)
             {
-                throw new BusinessException("Servidor não encontrado");
+                throw new BusinessException("Video não encontrado");
             }
 
             return video.Content;

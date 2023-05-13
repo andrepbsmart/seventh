@@ -26,7 +26,7 @@ namespace Prova.Application.Handlers.Videos
         {
             try
             {
-                IEnumerable<Video> videos = await _repository.ListAllVideos(request.idVideo);
+                IEnumerable<Video> videos = await _repository.ListAllVideos(request.idServer);
 
                 VideoResponse response = new VideoResponse
                 {

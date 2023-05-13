@@ -19,9 +19,9 @@ namespace Prova.Domain.Entities
 
             idServer = Guid.NewGuid().ToString();
             Name = name;
-            IP = new(ip);
+            IP = ip;
             Port = port;
-            CreationDate = DateTime.Today;
+            CreationDate = DateTime.UtcNow;
 
             ValidationRules(false);
         }
@@ -31,7 +31,7 @@ namespace Prova.Domain.Entities
 
             idServer = idserver;
             Name = name;
-            IP = new(ip);
+            IP = ip;
             Port = port;
 
             ValidationRules(true);
@@ -39,7 +39,7 @@ namespace Prova.Domain.Entities
 
         public string idServer { get; protected set; }
         public string Name { get; protected set; }
-        public IP IP { get; protected set; }
+        public string IP { get; protected set; }
         public int Port { get; protected set; }
         public DateTime CreationDate { get; protected set; }
 
@@ -57,15 +57,15 @@ namespace Prova.Domain.Entities
                 _notify.Add(nameof(Name), "Nome do servidor não informado");
             }
 
-            if (string.IsNullOrEmpty(IP.Value))
+            if (string.IsNullOrEmpty(IP))
             {
                 _notify.Add(nameof(IP), "IP do servidor não informado");
             }
 
-            if (!IP.IsValid())
-            {
-                _notify.Add(nameof(IP), "Endereço IP do servidor inválido");
-            }
+            //if (!IP.IsValid())
+            //{
+            //    _notify.Add(nameof(IP), "Endereço IP do servidor inválido");
+            //}
 
             if (Port == 0)
             {

@@ -25,7 +25,7 @@ namespace Prova.Application.Handlers.Videos
         {
             try
             {
-                await _repository.DeleteAsync(request.idServer, request.idVideo);
+                await _repository.DeleteAsync(request.idVideo);
 
                 return new Response { Message = Constants_Message.STATUS_CODE_SUCCESS, StatusCode = Constants_Code.STATUS_CODE_SUCCESS };
             }

@@ -25,14 +25,14 @@ namespace Prova.Application.Handlers.Videos
         {
             try
             {
-                Video server = _repository.FindById(request.idServer, request.idVideo);
+                Video video = _repository.FindById(request.idVideo).Result;
 
-                if (server == null)
+                if (video == null)
                 {
                     return null;
                 }
 
-                VideoResponseDetail detail = server;
+                VideoResponseDetail detail = video;
 
                 return detail;
             }

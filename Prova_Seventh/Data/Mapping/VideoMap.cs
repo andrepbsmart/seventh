@@ -11,6 +11,8 @@ namespace Prova.Data.Mapping
         {
             builder.ToTable("videos");
 
+            builder.HasKey(video => video.idVideo);
+
             builder.Property(video => video.idVideo)
                 .HasColumnName("idvideo")
                 .HasMaxLength(40);
@@ -29,17 +31,14 @@ namespace Prova.Data.Mapping
 
             builder.Property(video => video.Content)
                 .HasColumnName("content")
-                .HasMaxLength(8000)
-                .HasColumnType("varchar")
+                .HasColumnType("text")
                 .IsRequired();
 
             builder.Property(video => video.CreationDate)
                 .HasColumnName("creation_date")
                 .HasColumnType("datetime")
                 .IsRequired();
-
-            builder.HasKey(video => video.idVideo);
-
+           
             builder.Ignore(x => x.Notification);
         }
     }

@@ -11,6 +11,8 @@ namespace Prova.Data.Mapping
         {
             builder.ToTable("servers");
 
+            builder.HasKey(server => server.idServer);
+
             builder.Property(server => server.idServer)
                 .HasColumnName("idserver")
                 .HasMaxLength(40);
@@ -21,26 +23,27 @@ namespace Prova.Data.Mapping
                 .HasColumnType("varchar")
                 .IsRequired();
 
-            builder.OwnsOne(c => c.IP, b => b.Property("Value").HasColumnName("ip"));
-
-            //builder.Property(server => server.IP)
-            //    .HasColumnName("ip")
-            //    .HasMaxLength(20)
-            //    .HasColumnType("varchar")
-            //    .IsRequired();
+            builder.Property(server => server.IP)
+                .HasColumnName("ip")
+                .HasMaxLength(20)
+                .HasColumnType("varchar")
+                .IsRequired();
 
             builder.Property(server => server.Port)
                 .HasColumnName("port")
                 .HasColumnType("int")
                 .IsRequired();
 
+            //builder.OwnsOne(x => x.IP)
+            //    .Property(x => x.Value)
+            //    .HasColumnName("ip")
+            //    .IsRequired();
+
             builder.Property(server => server.CreationDate)
                 .HasColumnName("creation_date")
                 .HasColumnType("datetime")
                 .IsRequired();
-
-            builder.HasKey(server => server.idServer);
-
+           
             builder.Ignore(x => x.Notification);
         }
     }

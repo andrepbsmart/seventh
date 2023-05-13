@@ -34,7 +34,7 @@ namespace Prova.Application.Handlers.Servers
                     {
                         idServer = servers.idServer,
                         Name = servers.Name,
-                        IP = servers.IP.Value,
+                        IP = servers.IP,
                         Port = servers.Port,
                     }).Skip(request.ItensPerPage * (request.Page - 1)).Take(request.ItensPerPage).ToList(),
 

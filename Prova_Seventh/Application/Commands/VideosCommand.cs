@@ -23,4 +23,8 @@ namespace Prova.Application.Commands
         public string idServer { get; set; }
         public string idVideo { get; set; }
     }
+    public class VideoCommandRecycle : IRequest<Response>
+    {
+        public int Days { get; set; }
+    }
 }

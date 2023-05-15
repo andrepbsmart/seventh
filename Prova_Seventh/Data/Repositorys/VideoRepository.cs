@@ -25,9 +25,9 @@ namespace Prova.Data.Repositorys
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(string idvideo)
+        public async Task DeleteAsync(string idserver, string idvideo)
         {
-            var video = await Task.FromResult(_context.Videos.Where(x => x.idVideo == idvideo).FirstOrDefault());
+            var video = await Task.FromResult(_context.Videos.Where(x => x.idVideo == idvideo && x.idServer == idserver).FirstOrDefault());
             if (video == null)
             {
                 throw new BusinessException("Video não encontrado");

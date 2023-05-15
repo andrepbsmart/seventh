@@ -4,30 +4,31 @@ using System.Threading.Tasks;
 
 using MediatR;
 
-using Prova.Domain.Core;
-using Prova.Domain.Interfaces;
-
 using Prova.Application.Commands;
 using Prova.Application.Responses;
 
+using Prova.Domain.Core;
+using Prova.Domain.Entities;
+using Prova.Domain.Interfaces;
+
 namespace Prova.Application.Handlers.Videos
 {
-    public class VideoDeleteHandler : IRequestHandler<VideoCommandDelete, Response>
+    public class VideoRecycleHandler : IRequestHandler<VideoCommandRecycle, Response>
     {
-        private readonly IVideo _repository;
-
-        public VideoDeleteHandler(IVideo repository)
+        public VideoRecycleHandler()
         {
-            _repository = repository;
+
         }
 
-        public async Task<Response> Handle(VideoCommandDelete request, CancellationToken cancelationtoken)
+        public async Task<Response> Handle(VideoCommandRecycle request, CancellationToken cancelationtoken)
         {
             try
             {
-                await _repository.DeleteAsync(request.idServer, request.idVideo);
+                //Video dados = request;
 
-                return new Response { Message = Constants_Message.STATUS_CODE_SUCCESS, StatusCode = Constants_Code.STATUS_CODE_SUCCESS };
+                //await _repository.SaveAsync(dados);
+
+                return new Response { Message = Constants_Message.STATUS_CODE_CREATED, StatusCode = Constants_Code.STATUS_CODE_CREATED };
             }
             catch (BusinessException ex)
             {

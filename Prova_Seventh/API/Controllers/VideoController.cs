@@ -11,7 +11,7 @@ using Prova.Application.Responses;
 
 namespace Prova.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class VideoController : ControllerBase
     {
@@ -31,6 +31,7 @@ namespace Prova.API.Controllers
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(Response))]
         [SwaggerResponse((int)HttpStatusCode.TooManyRequests)]
         [HttpPost]
+        [Route("videos")]
         public async Task<IActionResult> CreateVideo([FromBody] VideoCommandCreate request)
         {
             try
@@ -53,10 +54,12 @@ namespace Prova.API.Controllers
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(Response))]
         [SwaggerResponse((int)HttpStatusCode.TooManyRequests)]
         [HttpDelete]
-        public async Task<IActionResult> DeleteVideo([FromQuery] VideoCommandDelete request)
+        [Route("servers/{serverid}/videos/{videoid}")]
+        public async Task<IActionResult> DeleteVideo(string serverid, string videoid)
         {
             try
             {
+                VideoCommandDelete request = new VideoCommandDelete() { idVideo = videoid, idServer = serverid };
                 var response = await _mediator.Send(request);
                 return StatusCode(response.StatusCode, response);
             }
@@ -75,10 +78,12 @@ namespace Prova.API.Controllers
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(Response))]
         [SwaggerResponse((int)HttpStatusCode.TooManyRequests)]
         [HttpGet]
-        public async Task<IActionResult> FindbyID([FromQuery] VideosQueryGetbyId request)
+        [Route("videos/{videoid}")]
+        public async Task<IActionResult> FindbyID(string videoid)
         {
             try
             {
+                VideosQueryGetbyId request = new VideosQueryGetbyId() { idVideo = videoid };
                 var response = await _mediator.Send(request);
                 if (response == null)
                 {
@@ -101,11 +106,12 @@ namespace Prova.API.Controllers
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(Response))]
         [SwaggerResponse((int)HttpStatusCode.TooManyRequests)]
         [HttpGet]
-        [Route("binary")]
-        public async Task<IActionResult> FindBinaryById([FromQuery] VideosQueryGetBinarybyId request)
+        [Route("videos/{videoid}/binary")]
+        public async Task<IActionResult> FindBinaryById(string videoid)
         {
             try
             {
+                VideosQueryGetBinarybyId request = new VideosQueryGetBinarybyId() { idVideo = videoid };
                 var response = await _mediator.Send(request);
                 if (response == null)
                 {
@@ -128,11 +134,36 @@ namespace Prova.API.Controllers
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(Response))]
         [SwaggerResponse((int)HttpStatusCode.TooManyRequests)]
         [HttpGet]
-        [Route("videos")]
-        public async Task<IActionResult> ListAllVideos([FromQuery] VideosQueryAll request)
+        [Route("servers/{serverid}/videos")]
+        public async Task<IActionResult> ListAllVideos(string serverid)
         {
             try
             {
+                VideosQueryAll request = new VideosQueryAll() { idServer = serverid };
+                var response = await _mediator.Send(request);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Response { StatusCode = StatusCodes.Status400BadRequest, Message = ex.Message });
+            };
+        }
+
+        /// <summary>
+        /// List All Videos
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [SwaggerResponse((int)HttpStatusCode.OK, "Recycle Old Videos", typeof(IEnumerable<VideosQueryAll>))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(Response))]
+        [SwaggerResponse((int)HttpStatusCode.TooManyRequests)]
+        [HttpGet]
+        [Route("recilcler/process/{days}")]
+        public async Task<IActionResult> Recycle(int days)
+        {
+            try
+            {
+                VideoCommandRecycle request = new VideoCommandRecycle() { Days = days };
                 var response = await _mediator.Send(request);
                 return Ok(response);
             }
